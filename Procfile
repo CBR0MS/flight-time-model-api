@@ -1,0 +1,1 @@
+web: gunicorn flygenius.wsgi --log-file -
