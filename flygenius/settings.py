@@ -18,13 +18,7 @@ from decouple import config
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
-ALLOWED_HOSTS = [
-    'localhost',
-    'api.flygeni.us'
-    'api-flygenius.herokuapp.com'
-]
+
 
 
 SECRET_KEY = config('SECRET_KEY')
@@ -36,6 +30,14 @@ DATABASES = {
         default=config('DATABASE_URL')
     )
 }
+
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'api.flygeni.us',
+    'api-flygenius.herokuapp.com'
+]
+
 
 # Application definition
 
@@ -61,6 +63,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 CORS_ORIGIN_WHITELIST = (
@@ -146,7 +149,9 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.0/howto/static-files/
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
+
