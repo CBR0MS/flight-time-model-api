@@ -1,0 +1,52 @@
+{% extends "rest_framework/base.html" %}
+
+{% block breadcrumbs %}
+<div style="height: 80px;"></div>
+{% endblock %}
+
+{% block content %}
+<style>
+  .centered {
+    width: 370px;
+    margin: 0 auto;
+  }
+  input {
+    background-color: hsl(204, 65%, 24%);
+    border-radius: 5px;
+    border: none;
+    height: 40px;
+    padding: 10px;
+  }
+  button {
+    background-color: hsl(29, 88%, 63%);
+    box-shadow: 5px 7px 30px hsla(204, 65%, 15%, 0.6);
+    border: none;
+    border-radius: 20px;
+    height: 40px;
+    width: 200px;
+    padding: 10px;
+    margin-top: 40px;
+    color: hsl(204, 65%, 24%);
+}
+button, input {
+  outline: none;
+}
+</style>
+<div class="centered">
+  <h2>Sign up</h2>
+  <p><em>You will receive your access token through email, so be sure you use an email address you can access.</em></p>
+  <form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+      <p>
+        {{ field.label_tag }}<br>
+        {{ field }}
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+      </p>
+    {% endfor %}
+    <button type="submit">Sign up &rarr;</button>
+  </form>
+</div>
+{% endblock %}

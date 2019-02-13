@@ -1,3 +1,10 @@
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render, redirect
+
+from api.forms import SignUpForm
+
+
 from .models import Airline, Airport, Route
 from rest_framework import viewsets
 from  .serializers import AirlineSerializer, AirportSerializer, RouteSerializer
@@ -207,3 +214,22 @@ class RouteViewSet(viewsets.ModelViewSet):
                     'route_airlines',
                     'route_flights_per_year',
                     'route_flight_volume_rank',)
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('/')
+    else:
+        form = SignUpForm()
+    return render(request, 'signup.html', {'form': form})
+
+
+
+

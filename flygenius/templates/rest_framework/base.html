@@ -1,4 +1,5 @@
 {% extends "rest_framework/base.html" %}
+{% load rest_framework %}
 
 {% load static %}
 
@@ -15,6 +16,15 @@
      <a class='navbar-brand' rel="nofollow" href='https://api.flygeni.us/'>
         <span class="fancy-font">FlyGenius</span> API
     </a>
+{% endblock %}
+
+{% block userlinks %}
+    {% if user.is_authenticated %}
+      {% optional_logout request user %}
+    {% else %}
+        <li><a href="/signup">Sign Up</a></li>
+      {% optional_login request %}
+    {% endif %}
 {% endblock %}
 
 {% block style %}
@@ -86,6 +96,14 @@
             background-color: hsl(29, 88%, 63%);
             box-shadow: 5px 7px 30px hsla(204, 65%, 15%, 0.6);
         }
+        .navbar .nav li a {
+            font-weight: 700;
+            font-size: 120%;
+            color: hsl(204, 65%, 24%);
+        }
+        .navbar .nav li a:hover {
+            color: hsl(204, 65%, 24%);
+        }
         .navbar-inverse .navbar-brand {
             color: hsl(204, 65%, 24%);
             font-style: italic;
@@ -106,6 +124,9 @@
         }
         .modal {
             color: hsl(204, 65%, 24%);
+        }
+        h1, h2, h3, h4 {
+            margin-top: 40px;
         }
     </style>
 
