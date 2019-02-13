@@ -1,0 +1,112 @@
+{% extends "rest_framework/base.html" %}
+
+{% load static %}
+
+ 
+{% block meta %}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+<link rel="icon" type="image/x-icon" href="{% static "favicon.ico" %}" />
+{% endblock %}
+
+{% block title %}{% if name %}{{ name }} – {% endif %}FlyGenius API{% endblock %}
+
+{% block branding %}
+     <a class='navbar-brand' rel="nofollow" href='https://api.flygeni.us/'>
+        <span class="fancy-font">FlyGenius</span> API
+    </a>
+{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/bootstrap.min.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/bootstrap-tweaks.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/prettify.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/default.css" %}"/>
+    <style>
+        @import url("https://use.typekit.net/gni0sjr.css");
+        @font-face {
+          font-family: 'PanAm';
+          src: url("{% static "PanAmTextCapsNew.ttf" %}")  format('truetype')
+        }
+        .fancy-font {
+            font-family: PanAm;
+            font-size: 150%;
+            margin-right: 10px;
+        }
+        body {
+            font-family: interstate, sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            color: rgba(255, 255, 255, 0.8);
+            background: none;
+            background-color: hsl(204, 65%, 29%);
+        }
+        .navbar-brand {
+            font-size: 200%;
+        }
+        .prettyprint {
+            color: rgba(255, 255, 255, 0.8);
+            background-color: hsl(204, 65%, 24%);
+            border: none;
+        }
+        pre {
+            background-color: hsl(204, 65%, 24%);
+            border: none;
+            font-family: interstate-mono, monospace;
+        }
+        pre {
+            color: hsl(29, 88%, 63%);
+        }
+        .lit {
+            color: hsl(29, 88%, 63%);
+        }
+        .pln {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        code {
+            background-color: hsl(204, 65%, 24%);
+            color: hsl(29, 88%, 63%);
+            font-family: interstate-mono, monospace;
+        }
+        .str {
+            color: hsl(29, 88%, 63%);
+        }
+        body a {
+            color: hsl(29, 88%, 63%);
+            text-decoration: underline;
+        }
+        body a:hover {
+            color: hsl(29, 88%, 63%);
+        }
+        pre code {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .navbar {
+            border-top: none;
+            background-color: hsl(29, 88%, 63%);
+            box-shadow: 5px 7px 30px hsla(204, 65%, 15%, 0.6);
+        }
+        .navbar-inverse .navbar-brand {
+            color: hsl(204, 65%, 24%);
+            font-style: italic;
+            font-weight: 700;
+            text-decoration: none;
+        }
+       .navbar-inverse .navbar-brand:hover {
+            color: hsl(204, 65%, 24%);
+        }
+        .breadcrumb {
+            background-color: hsl(204, 65%, 24%);
+            color: hsl(29, 88%, 63%);
+        }
+        .well {
+            background-color: rgba(255, 255, 255, 0.8);
+            color: hsl(204, 65%, 24%);
+            border: none;
+        }
+        .modal {
+            color: hsl(204, 65%, 24%);
+        }
+    </style>
+
+{% endblock %}
