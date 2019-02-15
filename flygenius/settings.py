@@ -24,7 +24,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 't3vFahYzJ&#TyerpeTvw48774nF2fhe6')
 
 DEBUG = bool(os.environ.get('DEBUG', True))
 
-ALLOWED_HOSTS = ['api.flygeni.us', 'localhost:8000']
+ALLOWED_HOSTS = ['api.flygeni.us', 'localhost']
 
 
 if os.getenv('GAE_APPLICATION', None):
@@ -95,6 +95,9 @@ CORS_ORIGIN_WHITELIST = []
 CORS_ORIGIN_ALLOW_ALL = True
 
 REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    ),
     'DEFAULT_THROTTLE_CLASSES': (
         'rest_framework.throttling.AnonRateThrottle',
         'rest_framework.throttling.UserRateThrottle'
@@ -104,7 +107,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+        'api.permissions.AllReadOnlyExceptAdmin',
     ],
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
     'DEFAULT_THROTTLE_RATES': {

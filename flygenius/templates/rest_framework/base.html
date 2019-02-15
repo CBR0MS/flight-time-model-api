@@ -22,7 +22,7 @@
     {% if user.is_authenticated %}
       {% optional_logout request user %}
     {% else %}
-        <li><a href="/signup">Sign Up</a></li>
+        <li><a href="/api-auth/signup/">Sign Up</a></li>
       {% optional_login request %}
     {% endif %}
 {% endblock %}

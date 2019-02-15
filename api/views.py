@@ -1,18 +1,21 @@
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 
 from api.forms import SignUpForm
 
-
 from .models import Airline, Airport, Route
 from rest_framework import viewsets
 from  .serializers import AirlineSerializer, AirportSerializer, RouteSerializer
-from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
+
+from api.responses import add_auth_to_reponse
+from rest_framework.response import Response
 
 
 class AirlineViewSet(viewsets.ModelViewSet):
+
+    http_method_names = ['get', 'options', 'head']
+
     """
     Returns a list of all airlines. 
 
@@ -63,22 +66,33 @@ class AirlineViewSet(viewsets.ModelViewSet):
 
     ## Airlines
     """
-    queryset = Airline.objects.all()
-    serializer_class = AirlineSerializer
-    filter_backends = (filters.SearchFilter,)
-    search_fields = ('airline_name',
-                    'airline_id',
-                    'airline_percent_ontime_arrival',
-                    'airline_flights_per_year',
-                    'airline_departure_delay',
-                    'airline_arrival_delay',
-                    'airline_destinations',
-                    'airline_ontime_departure_rank',
-                    'airline_ontime_arrival_rank',
-                    'airline_flight_volume_rank')
+    # queryset = Airline.objects.all()
+    # serializer_class = AirlineSerializer
+    # filter_backends = (filters.SearchFilter,)
+    # search_fields = ('airline_name',
+    #                 'airline_id',
+    #                 'airline_percent_ontime_arrival',
+    #                 'airline_flights_per_year',
+    #                 'airline_departure_delay',
+    #                 'airline_arrival_delay',
+    #                 'airline_destinations',
+    #                 'airline_ontime_departure_rank',
+    #                 'airline_ontime_arrival_rank',
+    #                 'airline_flight_volume_rank')
+
+    def list(self, request):
+        queryset = Airline.objects.all()
+        serializer = AirlineSerializer(queryset, many=True)
+        return add_auth_to_reponse(Response(serializer.data), request)
+
+    def retrieve(self, request, pk=None):
+        queryset =  Airline.objects.all()
+        airline = get_object_or_404(queryset, pk=pk)
+        serializer = AirlineSerializer(airline)
+        return add_auth_to_reponse(Response(serializer.data), request)
 
 
-class AirportViewSet(viewsets.ModelViewSet):
+class AirportViewSet(viewsets.ViewSet):
     """
     Returns a list of all airports. 
 
@@ -225,11 +239,13 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('/')
+            return redirect('/docs/')
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
 
+def docs(request):
+    return render(request, 'documentation.html')
 
 
 
