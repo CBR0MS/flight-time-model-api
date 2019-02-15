@@ -68,6 +68,122 @@
     </div>
     <div role='flatdoc-content' class='content'></div>
   </div>
+  <style>
+    @import url("https://use.typekit.net/gni0sjr.css");
+    @font-face {
+      font-family: 'PanAm';
+      src: url("http://api.flygeni.us/static/PanAmTextCapsNew.ttf")  format('truetype');
+    }
+    body {
+      font-family: interstate, sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.8);
+      background-color: hsl(204, 65%, 29%);
+    }
+    h1, h2, h3 {
+      font-style: italic;
+      font-family: interstate, sans-serif;
+      font-weight: 700;
+    }
+    code {
+      background-color: hsl(204, 65%, 24%) !important;
+      font-family: interstate-mono, monospace !important;
+      border: none !important;
+      color: rgba(255, 255, 255, 0.8);
+    }
+    .content ul > li:before {
+      border: none;
+    }
+    body.no-literate .content pre > code {
+      border: none;
+    }
+    ::-webkit-scrollbar-thumb {
+      border: none !important;
+    }
+    ::-webkit-scrollbar {
+      height: 5px !important;
+    }
+    
+    .content h1:before, .content h2:before, .content .big-heading:before, body.big-h3 .content h3:before {
+      box-shadow: none;
+      height: 3px;
+      background: -webkit-linear-gradient(left, transparent 0%, transparent 6%, hsl(204, 65%, 24%) 6%, hsl(204, 65%, 24%) 60%, transparent 60%);
+    }
+    .menubar {
+      background-color: hsl(204, 65%, 24%);
+      border-right: none !important;
+      
+    }
+    a, .menu a, .menu a:visited{
+      color: hsl(29, 88%, 63%);
+    }
+    .menu a.active, .menu a.active:visited, .menu a.active:hover {
+      color: white !important;
+    }
+    a:hover, .menu a:hover  {
+      color: hsl(29, 88%, 55%);
+    }
+    .menu a {
+      margin: 10px 0;
+    }
+    .level-1, .level-2, .level-3 {
+      max-width: 190px;
+    }
+    .menu a.active:after {
+      right: 0px;
+      background: white;
+    }
+    .logo {
+      font-family: PanAm;
+      font-size: 150%;
+      padding-right: 10px;
+    }
+    .header {
+      background-color: hsl(29, 88%, 63%);
+      color: hsl(204, 65%, 24%) !important;
+      border: none;
+      text-shadow: none;
+      width: 100vw;
+    }
+    .header h1 {
+      color: hsl(204, 65%, 24%) !important;
+      font-size: 22px;
+    }
+    .header li, .header li a {
+      border: none !important;
+      color: hsl(204, 65%, 24%) !important;
+      font-weight: 700;
+      font-size: 15px;
+    }
+    .header .right {
+      right: 0;
+      transform: translateX(-50%);
+    }
+    .content h1:first-child, .menu a.level-1, .menu a.level-1:hover {
+      color: hsl(29, 88%, 63%);
+    }
+    .content table tr :nth-child(2n), .content table tr, .content table tr :nth-child(3n)  {
+      background-color: transparent;
+    }
+    td, tr, th {
+      color: inherit !important;
+      border: none !important;
+    }
+    tr {
+      height: 40px;
+    }
+    table {
+      box-shadow: 5px 7px 30px hsla(204, 65%, 15%, 0.6);
+    }
+    .content h4, .content em {
+      color: inherit !important;
+      border: none;
+    }
+
+  </style>
+    }
 
 </body>
 </html>

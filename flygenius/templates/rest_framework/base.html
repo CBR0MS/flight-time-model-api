@@ -18,6 +18,10 @@
     </a>
 {% endblock %}
 
+{% block navbar %}
+<div></div>
+{% endblock %}
+
 {% block userlinks %}
     {% if user.is_authenticated %}
       {% optional_logout request user %}
@@ -36,7 +40,7 @@
         @import url("https://use.typekit.net/gni0sjr.css");
         @font-face {
           font-family: 'PanAm';
-          src: url("{% static "PanAmTextCapsNew.ttf" %}")  format('truetype')
+          src: url("http://api.flygeni.us/static/PanAmTextCapsNew.ttf")  format('truetype')
         }
         .fancy-font {
             font-family: PanAm;

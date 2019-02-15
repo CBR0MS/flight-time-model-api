@@ -1,4 +1,4 @@
-# Welcome to the FlyGenius API!
+# FlyGenius API Documentation
 
 ## About the API
 
@@ -68,7 +68,7 @@ Content-Type: application/json
 Now, you can authenticate with this token as described in the [previous section](#making-authenticated-requests-with-a-token). 
 
 ## Resources in the API
-There are three main resources in the API, [Airlines](#welcome-to-the-flygenius-api-resources-in-the-api-airlines), [Airports](#welcome-to-the-flygenius-api-resources-in-the-api-airports), and [Routes](#welcome-to-the-flygenius-api-resources-in-the-api-routes).
+There are three main resources in the API; [Airlines](#welcome-to-the-flygenius-api-resources-in-the-api-airlines), [Airports](#welcome-to-the-flygenius-api-resources-in-the-api-airports), and [Routes](#welcome-to-the-flygenius-api-resources-in-the-api-routes).
 ### Root 
 `/` - A list of all resources
 
@@ -108,18 +108,19 @@ Content-Type: application/json
 #### Attributes 
 Each airline has the following attributes:
 
-Attribute | Description 
-------|------
-`airline_name` *String* | The name of the airline.
-`airline_id` *String* | The unique 2 character ID for each airline. 
-`airline_percent_ontime_arrival` *Positive Integer* | Percent of flights that arrive ontime or early. 
-`airline_flights_per_year` *Positive Integer* | The average number of flights per year of the airline. 
-`airline_departure_delay` *Integer* | The average departure time, in minutes, of the airline, relative to scheduled departure. Negative numbers indicate early departures, positive numbers indicate late departures. 
-`airline_arrival_delay` *Integer* | The same as `airline_departure_delay`, except for arrivals. 
-`airline_destinations` *String List* | Airports that the airline flies to. 
-`airline_ontime_departure_rank` *Positive Integer* | The airline's ranking for ontime departures relative to all other airlines. An airline with a rank of 1 indicates it has the most ontime departures compared to all other airlines. 
-`airline_ontime_arrival_rank` *Positive Integer* | The same as `airline_ontime_departure_rank`, but for arrivals.
-`airline_flight_volume_rank` *Positive Integer* | The number of flights flown by the airline per year, relative to all other airlines. 1 indicates most flights, 2 second most, and so on. 
+
+Attribute | Type | Description 
+------|-----|-----
+`airline_name` | *String* | The name of the airline.
+`airline_id` | *String* | The unique 2 character ID for each airline. 
+`airline_percent_ontime_arrival` | *Positive Integer* | Percent of flights that arrive ontime or early. 
+`airline_flights_per_year` | *Positive Integer* | The average number of flights per year of the airline. 
+`airline_departure_delay` | *Integer* | The average departure time, in minutes, of the airline, relative to scheduled departure. Negative numbers indicate early departures, positive numbers indicate late departures. 
+`airline_arrival_delay` | *Integer* | The same as `airline_departure_delay`, except for arrivals. 
+`airline_destinations` | *String List* | Airports that the airline flies to. 
+`airline_ontime_departure_rank` | *Positive Integer* | The airline's ranking for ontime departures relative to all other airlines. An airline with a rank of 1 indicates it has the most ontime departures compared to all other airlines. 
+`airline_ontime_arrival_rank` | *Positive Integer* | The same as `airline_ontime_departure_rank`, but for arrivals.
+`airline_flight_volume_rank` | *Positive Integer* | The number of flights flown by the airline per year, relative to all other airlines. 1 indicates most flights, 2 second most, and so on. 
 
 ### Airports 
 
@@ -142,22 +143,23 @@ Content-Type: application/json
 #### Attributes 
 Each airport has the following attributes:
 
-Attribute | Description 
-------|-----
-`airport_name` *String* | The name of the airport. 
-`airport_id` *String* | The unique 3 character ID for each airport. 
-`airport_city` *String* | The city of the airport. 
-`airport_state` *String* | The 2 character state code of the airport. 
-`airport_percent_ontime_departure` *Positive Integer* | Percent of flights that depart ontime or early.
-`airport_taxi_in_time` *Positive Integer* | Average taxi in time, in minutes, for flights arriving at the airport. 
-`airport_taxi_out_time` *Positive Integer* | Average taxi out time, in minutes, for flights departing the airport. 
-`airport_departures_per_year` *Positive Integer* | The average number of departures per year of the airport.
-`airport_arrivals_per_year` *Positive Integer* | The average number of arrivals per year of the airport. 
-`airport_departure_delay` *Integer* | The average departure time, in minutes, of flights at the airport, relative to scheduled departure. Negative numbers indicate early departures, positive numbers indicate late departures. 
-`airport_destinations` *String List* | Airports that the can be flown to from the airport nonstop. 
-`airport_airlines` *String List* | Airlines that fly to the airport.  
-`airport_flight_volume_rank` *Positive Integer* | The number of flights flown to and from the airport per year, relative to all other airports. 1 indicates most flights, 2 second most, and so on. 
-`airline_ontime_departure_rank` *Positive Integer* | The airport's ranking for ontime departures relative to all other airports. An airport with a rank of 1 indicates it has the most ontime departures compared to all other airports. 
+
+Attribute | Type | Description 
+------|-----|-----
+`airport_name` | *String* | The name of the airport. 
+`airport_id` | *String* | The unique 3 character ID for each airport. 
+`airport_city` | *String* | The city of the airport. 
+`airport_state` | *String* | The 2 character state code of the airport. 
+`airport_percent_ontime_departure` | *Positive Integer* | Percent of flights that depart ontime or early.
+`airport_taxi_in_time` | *Positive Integer* | Average taxi in time, in minutes, for flights arriving at the airport. 
+`airport_taxi_out_time` | *Positive Integer* | Average taxi out time, in minutes, for flights departing the airport. 
+`airport_departures_per_year` | *Positive Integer* | The average number of departures per year of the airport.
+`airport_arrivals_per_year` | *Positive Integer* | The average number of arrivals per year of the airport. 
+`airport_departure_delay` | *Integer* | The average departure time, in minutes, of flights at the airport, relative to scheduled departure. Negative numbers indicate early departures, positive numbers indicate late departures. 
+`airport_destinations` | *String List* | Airports that the can be flown to from the airport nonstop. 
+`airport_airlines` | *String List* | Airlines that fly to the airport.  
+`airport_flight_volume_rank` | *Positive Integer* | The number of flights flown to and from the airport per year, relative to all other airports. 1 indicates most flights, 2 second most, and so on. 
+`airline_ontime_departure_rank` | *Positive Integer* | The airport's ranking for ontime departures relative to all other airports. An airport with a rank of 1 indicates it has the most ontime departures compared to all other airports. 
 
 ### Routes 
 
@@ -183,15 +185,15 @@ Content-Type: application/json
 #### Attributes 
 Each route has the following attributes:
 
-Attribute | Description 
-------|-----
-`route_name` *String* | The name of the route. Constructed by concatenating the ID of the origin airport with the ID of the destination, with an underscore between, like 'SFO_SEA'.
-`route_time` *Positive Integer* | The average flight duration from origin to destination, in minutes.  
-`route_origin_airport` *String* | The origin airport of the route. 
-`route_destination_airport` *String* | The destination airport of the route. 
-`route_airlines` *String List* | The airlines that fly the route nonstop. 
-`route_flights_per_year` *Positive Integer* | Average number of flights per year flown on the route. 
-`route_flight_volume_rank` *Positive Integer* | The route's ranking for number of flights flown per year, relative to all other routes. A route with rank 1 would be most flown, 2 second most, and so on. 
+Attribute | Type | Description 
+------|-----|-----
+`route_name` | *String* | The name of the route. Constructed by concatenating the ID of the origin airport with the ID of the destination, with an underscore between, like 'SFO_SEA'.
+`route_time` | *Positive Integer* | The average flight duration from origin to destination, in minutes.  
+`route_origin_airport` | *String* | The origin airport of the route. 
+`route_destination_airport` | *String* | The destination airport of the route. 
+`route_airlines` | *String List* | The airlines that fly the route nonstop. 
+`route_flights_per_year` | *Positive Integer* | Average number of flights per year flown on the route. 
+`route_flight_volume_rank` | *Positive Integer* | The route's ranking for number of flights flown per year, relative to all other routes. A route with rank 1 would be most flown, 2 second most, and so on. 
     
 
 
