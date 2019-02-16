@@ -10,31 +10,55 @@ from api.forms import SignUpForm
 from api.responses import add_auth_to_response
 
 from .models import Airline, Airport, Route
-from .serializers import AirlineSerializer, AirportSerializer, RouteSerializer
-
-
+from .serializers import AirlineSerializerHyperlinks, AirportSerializerHyperlinks, RouteSerializerHyperlinks
+from .serializers import AirlineSerializerIds, AirportSerializerIds, RouteSerializerIds
+from .serializers import AirlineSerializerPks, AirportSerializerPks, RouteSerializerPks
+from .serializers import AirportSerializerListHyperlinks, AirlineSerializerListHyperlinks, RouteSerializerListHyperlinks
+from .serializers import AirportSerializerListPks, AirlineSerializerListPks, RouteSerializerListPks
+from .serializers import AirportSerializerListIds, AirlineSerializerListIds, RouteSerializerListIds
 
 class StandardHTTPResponses(viewsets.ModelViewSet):
+    http_method_names = ['get', 'options', 'head', 'patch', 'put']
+    # determine which serializer we should use
+    def get_serializer(self, request, list_mode=False):
+        this_serializer = self._serializer
+        if list_mode:
+            this_serializer = self.list_serializer
+        ids = request.GET.get('use_rc_ids', '')
+        pks = request.GET.get('use_db_ids', '')
+        if ids.lower() == 'true':
+            this_serializer = self.id_serializer
+            if list_mode:
+                this_serializer = self.list_id_serializer
+        elif pks.lower() == 'true':
+            this_serializer = self.pk_serializer
+            if list_mode:
+                this_serializer = self.list_pk_serializer
+        return this_serializer
 
     def list(self, request):
-        serializer = self._serializer(self.queryset, many=True)
+        this_serializer = self.get_serializer(request, list_mode=True)
+        serializer = this_serializer(self.queryset, many=True)
         return add_auth_to_response(Response(serializer.data), request)
 
     def retrieve(self, request, pk=None):
         airline = get_object_or_404(self.queryset, pk=pk)
-        serializer = self._serializer(airline)
+        this_serializer = self.get_serializer(request)
+        serializer = this_serializer(airline)
         return add_auth_to_response(Response(serializer.data), request)
 
     def partial_update(self, request, *args, **kwargs):
         instance = self.queryset.get(pk=kwargs.get('pk'))
-        serializer = self._serializer(instance, data=request.data, partial=True)
+        this_serializer = self.get_serializer(request)
+        serializer = this_serializer(instance, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return add_auth_to_response(Response(serializer.data), request)
 
     def update(self, request, *args, **kwargs):
         instance = self.get_object_or_none()
-        serializer = self._serializer(instance, data=request.data)
+        this_serializer = self.get_serializer(request)
+        serializer = this_serializer(instance, data=request.data)
         serializer.is_valid(raise_exception=True)
 
         if instance is None:
@@ -55,27 +79,45 @@ class StandardHTTPResponses(viewsets.ModelViewSet):
                 self.check_permissions(clone_request(self.request, 'POST'))
             else:
                 raise
+    def put(self, request, *args, **kwargs):
+        return self.update(self, request, *args, **kwargs)
+
+    def patch(self, request, *args, **kwargs):
+        return self.partial_update(self, request, *args, **kwargs)
 
 class AirlineViewSet(StandardHTTPResponses):
 
-    http_method_names = ['get', 'options', 'head', 'patch', 'put']
     queryset = Airline.objects.all()
-    _serializer = AirlineSerializer
-
-
+    list_serializer = AirlineSerializerListHyperlinks
+    list_pk_serializer = AirlineSerializerListPks
+    list_id_serializer = AirlineSerializerListIds
+    _serializer = AirlineSerializerHyperlinks
+    pk_serializer = AirlineSerializerPks
+    id_serializer = AirlineSerializerIds
+    http_method_names = ['get', 'options', 'head', 'patch', 'put']
 
 class AirportViewSet(StandardHTTPResponses):
 
-    http_method_names = ['get', 'options', 'head', 'patch', 'put']
     queryset = Airport.objects.all()
-    _serializer = AirportSerializer
+    list_serializer = AirportSerializerListHyperlinks
+    list_pk_serializer = AirportSerializerListPks
+    list_id_serializer = AirportSerializerListIds
+    _serializer = AirportSerializerHyperlinks
+    pk_serializer = AirportSerializerPks
+    id_serializer = AirportSerializerIds
+    http_method_names = ['get', 'options', 'head', 'patch', 'put']
 
 
 class RouteViewSet(StandardHTTPResponses):
 
     http_method_names = ['get', 'options', 'head', 'patch', 'put']
     queryset = Route.objects.all()
-    _serializer = RouteSerializer
+    list_serializer = RouteSerializerListHyperlinks
+    list_pk_serializer = RouteSerializerListPks
+    list_id_serializer = RouteSerializerListIds
+    _serializer = RouteSerializerHyperlinks
+    pk_serializer = RouteSerializerPks
+    id_serializer = RouteSerializerIds
  
     # queryset = Route.objects.all()
     # serializer_class = RouteSerializer
