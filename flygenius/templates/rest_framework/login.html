@@ -33,8 +33,7 @@ button, input {
 }
 </style>
 <div class="centered">
-  <h2>Sign up</h2>
-  <p><em>You will receive your access token through email, so be sure you use an email address you can access.</em></p>
+  <h2>Login</h2>
   <form method="post">
     {% csrf_token %}
     {% for field in form %}
@@ -46,7 +45,7 @@ button, input {
         {% endfor %}
       </p>
     {% endfor %}
-    <button type="submit">Sign up &rarr;</button>
+    <button type="submit">Login &rarr;</button>
   </form>
 </div>
 {% endblock %}

@@ -1,17 +1,15 @@
 from django.urls import include, path
 from django.contrib import admin
-from rest_framework import routers
-from api import views
-from rest_framework.authtoken import views as authviews
-from api.responses import add_auth_to_reponse
-from rest_framework.response import Response
 from django.conf.urls.static import static
 from django.conf import settings
 
+from rest_framework import routers
+from rest_framework.authtoken import views as authviews
+
+from api import views
+
+
 class WelcomeView(routers.APIRootView):
-    """
-    
-    """
     pass
 
 

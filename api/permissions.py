@@ -5,8 +5,6 @@ class AllReadOnlyExceptAdmin(BasePermission):
 
     def has_permission(self, request, view):
         return bool(
-            (request.method in SAFE_METHODS and
-            (request.user or
-            request.user.is_authenticated)) or 
-            (request.user.is_authenticated and request.user.is_admin)
+            (request.user.is_authenticated and request.user.is_superuser) or
+            (request.method in SAFE_METHODS and(request.user or request.user.is_authenticated))
         )

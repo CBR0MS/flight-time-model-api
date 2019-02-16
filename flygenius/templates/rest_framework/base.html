@@ -19,7 +19,11 @@
 {% endblock %}
 
 {% block navbar %}
-<div></div>
+<a href="https://api.flygeni.us/docs">
+    <div class='left'>
+          <h1><span class="logo">FlyGenius</span> API</h1> 
+    </div>
+</a>
 {% endblock %}
 
 {% block userlinks %}
@@ -40,7 +44,7 @@
         @import url("https://use.typekit.net/gni0sjr.css");
         @font-face {
           font-family: 'PanAm';
-          src: url("http://api.flygeni.us/static/PanAmTextCapsNew.ttf")  format('truetype')
+          src: url("{% static "PanAmTextCapsNew.ttf" %}")  format('truetype')
         }
         .fancy-font {
             font-family: PanAm;
@@ -131,6 +135,24 @@
         }
         h1, h2, h3, h4 {
             margin-top: 40px;
+        }
+        .left h1{
+            color: hsl(29, 88%, 63%);
+            line-height: 1.6;
+            position: absolute;
+            left: 30px;
+            top: 20px;
+            font-style: italic;
+            font-size: 22px !important;
+            font-weight: 700;
+        }
+        .logo {
+            font-family: PanAm;
+            font-size: 150%;
+            padding-right: 10px;
+        }
+        #content {
+            margin-top: 80px;
         }
     </style>
 

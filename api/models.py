@@ -21,10 +21,11 @@ class Airport(models.Model):
     airport_departures_per_year = models.PositiveIntegerField(null=True)
     airport_arrivals_per_year = models.PositiveIntegerField(null=True)
     airport_departure_delay = models.SmallIntegerField(null=True)
-    airport_destinations = models.ManyToManyField('api.Airport')
-    airport_airlines = models.ManyToManyField('api.Airline')
+    airport_destinations = models.ManyToManyField('api.Airport', blank=True)
+    airport_airlines = models.ManyToManyField('api.Airline', blank=True)
     airport_flight_volume_rank = models.PositiveSmallIntegerField(null=True)
     airport_ontime_departure_rank = models.PositiveSmallIntegerField(null=True)
+    id = models.AutoField(primary_key=True)
 
     def __str__(self):
         return self.airport_name + ' (' + self.airport_id + ')'
@@ -36,10 +37,11 @@ class Airline(models.Model):
     airline_flights_per_year = models.PositiveIntegerField(null=True)
     airline_departure_delay = models.SmallIntegerField(null=True)
     airline_arrival_delay = models.SmallIntegerField(null=True)
-    airline_destinations = models.ManyToManyField('api.Airport')
+    airline_destinations = models.ManyToManyField('api.Airport', blank=True)
     airline_ontime_departure_rank = models.PositiveSmallIntegerField(null=True)
     airline_ontime_arrival_rank = models.PositiveSmallIntegerField(null=True)
     airline_flight_volume_rank = models.PositiveSmallIntegerField(null=True)
+    id = models.AutoField(primary_key=True)
 
     def __str__(self):
         return self.airline_name + ' (' + self.airline_id + ')'
@@ -52,6 +54,7 @@ class Route(models.Model):
     route_airlines = models.ManyToManyField('api.Airline')
     route_flights_per_year = models.PositiveIntegerField(null=True)
     route_flight_volume_rank = models.PositiveSmallIntegerField(null=True)
+    id = models.AutoField(primary_key=True)
 
     def __str__(self):
         return self.route_name

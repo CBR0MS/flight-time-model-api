@@ -108,6 +108,7 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PERMISSION_CLASSES': [
         'api.permissions.AllReadOnlyExceptAdmin',
+        #'rest_framework.permissions.AllowAny'
     ],
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
     'DEFAULT_THROTTLE_RATES': {
