@@ -24,7 +24,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 't3vFahYzJ&#TyerpeTvw48774nF2fhe6')
 
 DEBUG = bool(os.environ.get('DEBUG', True))
 
-ALLOWED_HOSTS = ['api.flygeni.us', 'localhost']
+ALLOWED_HOSTS = ['api.flygeni.us', 'localhost', '127.0.0.1']
 
 
 if os.getenv('GAE_APPLICATION', None):

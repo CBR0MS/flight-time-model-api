@@ -199,7 +199,9 @@ Content-Type: application/json
 
 `/airlines/` - A list of all airlines, ordered from most to least flights per year. 
 
-`/airlines/<id>/` - The specific airline requested 
+`/airlines/<database_id>/` - The specific airline requested with database ID
+
+`/airlines/<airline_id>/` - The specific airline requested with airline ID
 
  A request might look like this:
 ```HTTP
@@ -254,7 +256,9 @@ Attribute | Type | Description
 
 `/airports/` - A list of all airports, ordered from most to least busy. 
 
-`/airports/<id>/` - The specific airport requested 
+`/airports/<database_id>/` - The specific airport requested with database ID
+
+`/airports/<airport_id>/` - The specific airport requested with airport ID
 
  A request might look like this:
 ```HTTP
@@ -324,7 +328,9 @@ Attribute | Type | Description
 
 `/routes/` - A list of all routes, ordered from most to least frequently flown. 
 
-`/routes/<id>/` - The specific route requested 
+`/routes/<database_id>/` - The specific route requested with database ID
+
+`/routes/<route_name>/` - The specific route requested with route name
 
 Note that routes are uni-directional, or **one way**. The route from San Francsico to Seattle includes information for just the one direction; there is a separate route for Seattle to San Francisco. 
 

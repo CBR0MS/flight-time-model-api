@@ -151,4 +151,14 @@ class RouteSerializerListPks(serializers.ModelSerializer):
         model = Route
         fields = ('database_id',)
 
+# list details serializers 
+class AirlineSerializerListDetails(serializers.ModelSerializer):
+    class Meta:
+        model = Airline
+        fields = ('airline_name','airline_id',)
+class AirportSerializerListDetails(serializers.ModelSerializer):
+    class Meta:
+        model = Airport
+        fields = ('airport_name', 'airport_id', 'airport_city','airport_state',)
+
 

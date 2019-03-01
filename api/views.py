@@ -16,6 +16,7 @@ from .serializers import AirlineSerializerPks, AirportSerializerPks, RouteSerial
 from .serializers import AirportSerializerListHyperlinks, AirlineSerializerListHyperlinks, RouteSerializerListHyperlinks
 from .serializers import AirportSerializerListPks, AirlineSerializerListPks, RouteSerializerListPks
 from .serializers import AirportSerializerListIds, AirlineSerializerListIds, RouteSerializerListIds
+from .serializers import AirportSerializerListDetails, AirlineSerializerListDetails
 
 class StandardHTTPResponses(viewsets.ModelViewSet):
     http_method_names = ['get', 'options', 'head', 'patch', 'put']
@@ -26,6 +27,8 @@ class StandardHTTPResponses(viewsets.ModelViewSet):
             this_serializer = self.list_serializer
         ids = request.GET.get('use_rc_ids', '')
         pks = request.GET.get('use_db_ids', '')
+        details = request.GET.get('use_details', '')
+
         if ids.lower() == 'true':
             this_serializer = self.id_serializer
             if list_mode:
@@ -34,6 +37,8 @@ class StandardHTTPResponses(viewsets.ModelViewSet):
             this_serializer = self.pk_serializer
             if list_mode:
                 this_serializer = self.list_pk_serializer
+        elif details.lower() == 'true' and list_mode:
+            this_serializer = self.list_details_serializer
         return this_serializer
 
     def list(self, request):
@@ -42,7 +47,12 @@ class StandardHTTPResponses(viewsets.ModelViewSet):
         return add_auth_to_response(Response(serializer.data), request)
 
     def retrieve(self, request, pk=None):
-        airline = get_object_or_404(self.queryset, pk=pk)
+        airline = {}
+        try:
+            airline = get_object_or_404(self.queryset, pk=pk)
+        except ValueError:
+            airline = self.get_object_or_404_with_string(pk)
+        
         this_serializer = self.get_serializer(request)
         serializer = this_serializer(airline)
         return add_auth_to_response(Response(serializer.data), request)
@@ -91,10 +101,14 @@ class AirlineViewSet(StandardHTTPResponses):
     list_serializer = AirlineSerializerListHyperlinks
     list_pk_serializer = AirlineSerializerListPks
     list_id_serializer = AirlineSerializerListIds
+    list_details_serializer = AirlineSerializerListDetails
     _serializer = AirlineSerializerHyperlinks
     pk_serializer = AirlineSerializerPks
     id_serializer = AirlineSerializerIds
     http_method_names = ['get', 'options', 'head', 'patch', 'put']
+
+    def get_object_or_404_with_string(self, query):
+        return get_object_or_404(self.queryset, airline_id=query)
 
 class AirportViewSet(StandardHTTPResponses):
 
@@ -102,10 +116,14 @@ class AirportViewSet(StandardHTTPResponses):
     list_serializer = AirportSerializerListHyperlinks
     list_pk_serializer = AirportSerializerListPks
     list_id_serializer = AirportSerializerListIds
+    list_details_serializer = AirportSerializerListDetails
     _serializer = AirportSerializerHyperlinks
     pk_serializer = AirportSerializerPks
     id_serializer = AirportSerializerIds
     http_method_names = ['get', 'options', 'head', 'patch', 'put']
+
+    def get_object_or_404_with_string(self, query):
+        return get_object_or_404(self.queryset, airport_id=query)
 
 
 class RouteViewSet(StandardHTTPResponses):
@@ -115,9 +133,13 @@ class RouteViewSet(StandardHTTPResponses):
     list_serializer = RouteSerializerListHyperlinks
     list_pk_serializer = RouteSerializerListPks
     list_id_serializer = RouteSerializerListIds
+    list_details_serializer = RouteSerializerListIds
     _serializer = RouteSerializerHyperlinks
     pk_serializer = RouteSerializerPks
     id_serializer = RouteSerializerIds
+
+    def get_object_or_404_with_string(self, query):
+        return get_object_or_404(self.queryset, route_name=query)
  
     # queryset = Route.objects.all()
     # serializer_class = RouteSerializer
