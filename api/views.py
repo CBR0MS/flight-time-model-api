@@ -167,6 +167,7 @@ def signup(request):
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
 
+
 def docs(request):
     return render(request, 'documentation.html')
 

@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'api',
+    'apiManagement',
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken'
@@ -90,9 +91,9 @@ MIDDLEWARE = [
 #     'localhost:8000',
 # )
 
-CORS_ORIGIN_WHITELIST = []
+# CORS_ORIGIN_WHITELIST = []
 
-CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ORIGIN_ALLOW_ALL = True
 
 # see https://docs.djangoproject.com/en/2.2/ref/settings/#secure-proxy-ssl-header
 # and https://cloud.google.com/appengine/docs/flexible/python/reference/request-headers
@@ -117,7 +118,7 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
     'DEFAULT_THROTTLE_RATES': {
         'anon': '20/day',
-        'user': '10000/day'
+        'user': '2000/day'
     },
     # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     # 'PAGE_SIZE': 100,
@@ -162,6 +163,12 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+EMAIL_HOST = 'smtp.mailgun.org'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'postmaster@mg.api.flygeni.us'
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD', 'secretpasswordhere')
+EMAIL_USE_TLS = True
 
 
 # Internationalization

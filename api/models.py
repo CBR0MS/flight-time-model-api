@@ -4,10 +4,33 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 
+from apiManagement.models import Email
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import get_template
+from django.utils.html import strip_tags
+
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
-        Token.objects.create(user=instance)
+        token = Token.objects.create(user=instance)
+        to_email = instance.email
+
+        email_content_obj = Email.objects.get(name='registered_new_user')
+        from_email = email_content_obj.email_name + ' <' + email_content_obj.send_from + '>'
+        content = {'user': instance.username, 'token': token}
+
+        open('flygenius/templates/temp_email.html', 'w').close()
+        text_file = open('flygenius/templates/temp_email.html', 'w')
+        text_file.write(email_content_obj.content)
+        text_file.close()
+
+        html_template = get_template('temp_email.html')
+        html_content = html_template.render(content)
+        plain_content = strip_tags(html_content)
+
+        msg = EmailMultiAlternatives(email_content_obj.subject, plain_content, from_email, [to_email] )
+        msg.attach_alternative(html_content, 'text/html')
+        msg.send()
 
 
 class Airport(models.Model):

@@ -4,16 +4,19 @@
 
 This is the API behind the flight time prediction and airline comparison done at FlyGenius. [Check out the website](https://flygeni.us) if you haven't already!
 
-The FlyGenius API contains a compilation of statistics from all U.S. Domestic flights during the three year period 2015-18. The original dataset comes from the Bureau of Transportation Statistics and can be [found here](https://www.transtats.bts.gov/DatabaseInfo.asp?DB_ID=120&DB_Name=Airline%20On-Time%20Performance%20Data) in its original `.csv` form.
+The FlyGenius API contains a compilation of statistics from all U.S. Domestic flights during the three year period 2015-18. The original dataset comes from the Bureau of Transportation Statistics and can be [found here](https://www.transtats.bts.gov/DatabaseInfo.asp?DB_ID=120&DB_Name=Airline%20On-Time%20Performance%20Data) in its original form.
     
-Each flight in the dataset has been pulled out and used to create statistics for the relevant airports, airline, and route. We've computed averages and rankings for a variety of useful metrics from the original dataset. This API is useful for gaining insight into overall trends in airline and airport performance, rather than information about specific flights. If you're interested in individual flights, let us know, as this is a feature we're thinking about implementing if there's enough demand. 
+Each flight in the dataset has been pulled out and used to create statistics for the relevant airports, airline, and route. We've computed averages and rankings for a variety of useful metrics from the original dataset. This API is useful for gaining insight into overall trends in airline and airport performance, rather than information about specific flights. 
 
 ## Accessing the API
 
-The FlyGenius API is available for use free of charge. We strongly encourage users to [create an account](https://api.flygeni.us/api-auth/signup/) and get an API token for access, as doing so will grant you 1,000 requests per day. If you do not make an account and make a request without a token, you will be limited to just 20 requests per day. So please, make an account!
+### Get A Token 
 
-If you require more than 1,000 requests, please contact us.
+The FlyGenius API is available for use free of charge. We strongly encourage users to [create an account](https://api.flygeni.us/api-auth/signup/) and get an API token for access, as doing so will grant you 2,000 requests per day. If you do not make an account and make a request without a token, you will be limited to just 20 requests per day. So please, make an account!
 
+To get a token, first [create an account](https://api.flygeni.us/api-auth/signup/). You will get your token via email within a few minutes. 
+
+If you loose your token, you can get it again by [authenticating with your credentials](#flygenius-api-documentation-accessing-the-api-authentication-without-a-token). 
 
 ### Making Requests
     
@@ -176,7 +179,7 @@ Content-Type: application/json
 Now, you can authenticate with this token as described in the [previous section](#making-authenticated-requests-with-a-token). 
 
 ## Resources in the API
-There are three main resources in the API; [Airlines](#welcome-to-the-flygenius-api-resources-in-the-api-airlines), [Airports](#welcome-to-the-flygenius-api-resources-in-the-api-airports), and [Routes](#welcome-to-the-flygenius-api-resources-in-the-api-routes).
+There are three main resources in the API; [Airlines](#flygenius-api-documentation-resources-in-the-api-airlines), [Airports](#flygenius-api-documentation-resources-in-the-api-airports), and [Routes](#flygenius-api-documentation-resources-in-the-api-routes).
 ### Root 
 `/` - A list of all resources
 

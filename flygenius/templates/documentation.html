@@ -3,19 +3,7 @@
 {% load static %}
 
 <!doctype html>
-<!--
 
-  Instructions:
-
-  - Save this file.
-  - Replace "USER" with your GitHub username.
-  - Replace "REPO" with your GitHub repo name.
-  - Replace "Your Project" with your project name.
-  - Upload this file (or commit to GitHub Pages).
-
-  Customize as you see fit!
-
--->
 <html>
 <head>
   <meta charset='utf-8'>
@@ -35,8 +23,8 @@
   <script src='https://cdn.rawgit.com/rstacruz/flatdoc/v0.9.0/theme-white/script.js'></script>
 
   <!-- Meta -->
-  <meta content="Your Project" property="og:title">
-  <meta content="Your Project description goes here." name="description">
+  <meta content="FlyGenius API Docs" property="og:title">
+  <meta content="Get airline, airport, and route flight time data with the FlyGenius API" name="description">
 
   <!-- Initializer -->
   <script>
@@ -54,7 +42,9 @@
     </div>
     <div class='right'>
       {% if user.is_authenticated %}
-        {% optional_logout request user %}
+<!--         {% optional_logout request user %} -->
+        <li>Hi {{ user.username }}!</li>
+        <li><a href="/api-auth/logout/?next=/docs/">Logout</a></li>
       {% else %}
         <li><a href="/api-auth/signup/">Sign Up</a></li>
       {% optional_login request %}
