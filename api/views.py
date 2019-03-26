@@ -9,11 +9,11 @@ from rest_framework import status, viewsets, filters
 from api.forms import SignUpForm
 from api.responses import add_auth_to_response
 
-from .models import Airline, Airport, Route
+from .models import Airline, Airport, Route, FlightNumber
 from .serializers import AirlineSerializerHyperlinks, AirportSerializerHyperlinks, RouteSerializerHyperlinks
 from .serializers import AirlineSerializerIds, AirportSerializerIds, RouteSerializerIds
 from .serializers import AirlineSerializerPks, AirportSerializerPks, RouteSerializerPks
-from .serializers import AirportSerializerListHyperlinks, AirlineSerializerListHyperlinks, RouteSerializerListHyperlinks
+from .serializers import AirportSerializerListHyperlinks, AirlineSerializerListHyperlinks, RouteSerializerListHyperlinks, FlightNumberListHyperlinks
 from .serializers import AirportSerializerListPks, AirlineSerializerListPks, RouteSerializerListPks
 from .serializers import AirportSerializerListIds, AirlineSerializerListIds, RouteSerializerListIds
 from .serializers import AirportSerializerListDetails, AirlineSerializerListDetails
@@ -140,6 +140,23 @@ class RouteViewSet(StandardHTTPResponses):
 
     def get_object_or_404_with_string(self, query):
         return get_object_or_404(self.queryset, route_name=query)
+
+
+
+class FlightNumberViewSet(StandardHTTPResponses):
+
+    http_method_names = ['get', 'options', 'head', 'patch', 'put']
+    queryset = FlightNumber.objects.all()
+    list_serializer = FlightNumberListHyperlinks
+    list_pk_serializer = FlightNumberListHyperlinks
+    list_id_serializer = FlightNumberListHyperlinks
+    list_details_serializer = FlightNumberListHyperlinks
+    _serializer = FlightNumberListHyperlinks
+    pk_serializer = FlightNumberListHyperlinks
+    id_serializer = FlightNumberListHyperlinks
+
+    def get_object_or_404_with_string(self, query):
+        return get_object_or_404(self.queryset, flight_number_unique=query)
  
     # queryset = Route.objects.all()
     # serializer_class = RouteSerializer

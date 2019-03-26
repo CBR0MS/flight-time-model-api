@@ -41,6 +41,7 @@ router = Router()
 router.register(r'airlines', views.AirlineViewSet, basename='airlines')
 router.register(r'airports', views.AirportViewSet, basename='airports')
 router.register(r'routes', views.RouteViewSet, basename='routes')
+router.register(r'flightnumbers', views.FlightNumberViewSet, basename='flightnumbers')
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

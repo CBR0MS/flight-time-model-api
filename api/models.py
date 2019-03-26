@@ -19,11 +19,6 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
         from_email = email_content_obj.email_name + ' <' + email_content_obj.send_from + '>'
         content = {'user': instance.username, 'token': token}
 
-        open('flygenius/templates/temp_email.html', 'w').close()
-        text_file = open('flygenius/templates/temp_email.html', 'w')
-        text_file.write(email_content_obj.content)
-        text_file.close()
-
         html_template = get_template('temp_email.html')
         html_content = html_template.render(content)
         plain_content = strip_tags(html_content)
@@ -82,12 +77,20 @@ class Airline(models.Model):
     def __str__(self):
         return self.airline_name + ' (' + self.airline_id + ')'
 
+class FlightNumber(models.Model):
+    flight_number = models.CharField(max_length=40)
+    flight_number_unique = models.CharField(max_length=40, null=True)
+
+    def __str__(self):
+        return self.flight_number
+
 class Route(models.Model):
     route_name = models.CharField(max_length=30)
     route_time = models.PositiveSmallIntegerField(null=True)
     route_origin_airport = models.ForeignKey('api.Airport', on_delete=models.CASCADE, related_name='origin_airport')
     route_destination_airport = models.ForeignKey('api.Airport', on_delete=models.CASCADE, related_name='destination_airport')
     route_airlines = models.ManyToManyField('api.Airline')
+    route_flight_numbers = models.ManyToManyField('api.FlightNumber')
     route_flights_per_year = models.PositiveIntegerField(null=True)
     route_flight_volume_rank = models.PositiveSmallIntegerField(null=True)
     url = models.URLField(null=True)
@@ -100,3 +103,9 @@ class Route(models.Model):
 
     def __str__(self):
         return self.route_name
+
+
+
+
+
+

@@ -93,7 +93,7 @@ MIDDLEWARE = [
 
 # CORS_ORIGIN_WHITELIST = []
 
-# CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_ALLOW_ALL = True
 
 # see https://docs.djangoproject.com/en/2.2/ref/settings/#secure-proxy-ssl-header
 # and https://cloud.google.com/appengine/docs/flexible/python/reference/request-headers
@@ -105,7 +105,7 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_THROTTLE_CLASSES': (
         'rest_framework.throttling.AnonRateThrottle',
-        'rest_framework.throttling.UserRateThrottle'
+        #'rest_framework.throttling.UserRateThrottle'
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
@@ -117,8 +117,7 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
     'DEFAULT_THROTTLE_RATES': {
-        'anon': '20/day',
-        'user': '2000/day'
+        'anon': '60/day'
     },
     # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     # 'PAGE_SIZE': 100,

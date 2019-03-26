@@ -1,4 +1,4 @@
-from .models import Airline, Airport, Route
+from .models import Airline, Airport, Route, FlightNumber
 from rest_framework import serializers
 
 # serializers with hyperlinks for ManyToMany fields 
@@ -44,6 +44,13 @@ class RouteSerializerHyperlinks(serializers.ModelSerializer):
         queryset=Airport.objects.all(),
         slug_field='url'
     )
+
+    route_flight_numbers = serializers.SlugRelatedField(
+        many=True,
+        queryset=FlightNumber.objects.all(),
+        slug_field='flight_number'
+    )
+
     class Meta:
         model = Route 
         fields = '__all__'
@@ -61,6 +68,10 @@ class RouteSerializerListHyperlinks(serializers.ModelSerializer):
     class Meta:
         model = Route
         fields = ('url',)
+class FlightNumberListHyperlinks(serializers.ModelSerializer):
+    class Meta:
+        model = FlightNumber
+        fields = '__all__'
 
 # serializers with airline/airport ids for ManyToMany fields 
 
@@ -105,6 +116,11 @@ class RouteSerializerIds(serializers.ModelSerializer):
         queryset=Airport.objects.all(),
         slug_field='airport_id'
     )
+    route_flight_numbers = serializers.SlugRelatedField(
+        many=True,
+        queryset=FlightNumber.objects.all(),
+        slug_field='flight_number_unique'
+    )
     class Meta:
         model = Route 
         fields = '__all__'
@@ -133,6 +149,11 @@ class AirportSerializerPks(serializers.ModelSerializer):
         model = Airport
         fields = '__all__'
 class RouteSerializerPks(serializers.ModelSerializer):
+    route_flight_numbers = serializers.SlugRelatedField(
+        many=True,
+        queryset=FlightNumber.objects.all(),
+        slug_field='flight_number_unique'
+    )
     class Meta:
         model = Route 
         fields = '__all__'
@@ -155,10 +176,10 @@ class RouteSerializerListPks(serializers.ModelSerializer):
 class AirlineSerializerListDetails(serializers.ModelSerializer):
     class Meta:
         model = Airline
-        fields = ('airline_name','airline_id',)
+        fields = ('airline_name','airline_id', 'airline_percent_ontime_arrival',)
 class AirportSerializerListDetails(serializers.ModelSerializer):
     class Meta:
         model = Airport
-        fields = ('airport_name', 'airport_id', 'airport_city','airport_state',)
+        fields = ('airport_name', 'airport_id', 'airport_city','airport_state', 'airport_percent_ontime_departure',)
 
 
